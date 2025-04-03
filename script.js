@@ -122,15 +122,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Mobile Cards Slider
-    const creditCardsWrapper = document.querySelector('.credit-cards-wrapper');
+    const creditCards = document.querySelector('.credit-cards');
     const dots = document.querySelectorAll('.dot');
     let currentSlide = 0;
     let isMobile = window.innerWidth <= 320;
 
     function initMobileSlider() {
         if (!isMobile) return;
+        
+        if (!creditCards) return;
 
-        const cards = creditCardsWrapper.querySelectorAll('.credit-card');
+        const cards = creditCards.querySelectorAll('.credit-card');
         cards.forEach((card, index) => {
             card.style.transform = `translateX(${index * 100}%)`;
         });
@@ -138,8 +140,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function goToSlide(slideIndex) {
         if (!isMobile) return;
+        
+        if (!creditCards) return;
 
-        const cards = creditCardsWrapper.querySelectorAll('.credit-card');
+        const cards = creditCards.querySelectorAll('.credit-card');
         cards.forEach((card, index) => {
             card.style.transform = `translateX(${(index - slideIndex) * 100}%)`;
             card.style.transition = 'transform 0.3s ease';
@@ -168,7 +172,9 @@ document.addEventListener('DOMContentLoaded', function() {
             initMobileSlider();
         } else {
             // Reset transforms for desktop
-            const cards = creditCardsWrapper.querySelectorAll('.credit-card');
+            if (!creditCards) return;
+            
+            const cards = creditCards.querySelectorAll('.credit-card');
             cards.forEach(card => {
                 card.style.transform = '';
                 card.style.transition = '';
